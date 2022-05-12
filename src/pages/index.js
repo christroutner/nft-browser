@@ -1,8 +1,12 @@
 import * as React from "react"
 import NFTs from '../components/nfts'
 
-const BchWallet = typeof window !== 'undefined' ? window.SlpWallet : null
-const options = { interface: 'consumer-api' }
+let wallet = {}
+if(typeof window !== 'undefined') {
+  const BchWallet = window.SlpWallet
+  const options = { interface: 'consumer-api' }
+  wallet = new BchWallet(null, options)
+}
 
 // styles
 const pageStyles = {
@@ -134,7 +138,7 @@ const IndexPage = (props) => {
 
   // let bchjs
   // if (BchWallet) {
-    const wallet = new BchWallet(null, options)
+    // const wallet = new BchWallet(null, options)
   //   // bchjs = wallet.bchjs
   //
   //   const tokenId = 'c85042ab08a2099f27de880a30f9a42874202751d834c42717a20801a00aab0d'
