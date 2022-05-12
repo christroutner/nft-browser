@@ -1,47 +1,56 @@
+
+// Global npm libraries
 import React from 'react'
-// import Search from './search'
-// import IconBox from './icon-box'
-// import ImmutableData from './immutable-data'
-// import MutableData from './mutable-data'
-// import GenesisData from './genesis-data'
-// import * as displayStyles from '../styles/display.module.scss'
 
-// const SlpMutableData =
-//   typeof window !== 'undefined'
-//     ? require('slp-mutable-data').SlpMutableData
-//     : null
+// Local libraries
+import NFTCard from './nft-card'
 
-// const GATEWAY = 'https://ipfs.io/ipfs/'
-
-// const NFTs = (props) => {
 class NFTs extends React.Component {
 
   constructor(props) {
     super(props)
 
     this.wallet = props.wallet
+
+    this.state = {
+      nftData: []
+    }
   }
 
   async componentDidMount() {
     await this.wallet.walletInfoPromise
-    const tokenId = '1709f11fe46491b37ecccad948d69b467419c1caef5436df5f527bcc6eff9959'
+    const tokenId = '288c1375c8e988c02672e7ccc88dedd5c8e07f44245fb0640593ce468f57a37f'
     const tokenData = await this.wallet.getTokenData(tokenId)
-    console.log(`tokenData: ${JSON.stringify(tokenData, null, 2)}`)
+    console.log(`Group tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
     const nfts = tokenData.genesisData.nfts
+    const nftData = []
 
     for(let i=0; i < nfts.length; i++) {
       const thisNft = nfts[i]
 
       const thisNftData = await this.wallet.getTokenData(thisNft)
-      console.log(`thisNftData: ${JSON.stringify(thisNftData, null, 2)}`)
+      console.log(`thisNftData ${i}: ${JSON.stringify(thisNftData, null, 2)}`)
+
+      nftData.push(thisNftData)
     }
+
+    this.setState({
+      nftData
+    })
   }
 
   render() {
     return (
       <div>
         <p>test</p>
+        {
+          this.state.nftData.map((val, i) => {
+            return (
+              <NFTCard tokenData={val} key={val.genesisData.tokenId} />
+            )
+          })
+        }
       </div>
     )
   }
