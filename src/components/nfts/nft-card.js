@@ -3,6 +3,7 @@
 */
 
 import React from 'react'
+import axios from 'axios'
 
 // Styles
 const cardStyle = {
@@ -16,13 +17,59 @@ class NFTCard extends React.Component {
     super(props)
 
     this.tokenData = props.tokenData
+
+    this.state = {
+      mutableData: {},
+      immutableData: {}
+    }
   }
 
+
+  async componentDidMount() {
+    try {
+      const immutableCid = this.tokenData.immutableData.slice(7)
+      const url = `https://${immutableCid}.ipfs.dweb.link/data.json`
+      // console.log('url: ', url)
+      const response = await axios.get(url)
+      const data = response.data
+      console.log(`immutable data for ${this.tokenData.genesisData.ticker}: ${JSON.stringify(data, null, 2)}`)
+      this.setState({
+        immutableData: data
+      })
+    } catch(err) {
+      console.log(`Error trying to retrieve immutable data for NFT ${this.tokenData.genesisData.ticker}`)
+    }
+
+    try {
+      const mutableCid = this.tokenData.mutableData.slice(7)
+      const url = `https://${mutableCid}.ipfs.dweb.link/data.json`
+      // console.log('url: ', url)
+      const response = await axios.get(url)
+      const data = response.data
+      console.log(`mutable data for ${this.tokenData.genesisData.ticker}: ${JSON.stringify(data, null, 2)}`)
+      this.setState({
+        mutableData: data
+      })
+    } catch(err) {
+      console.log(`Error trying to retrieve immutable data for NFT ${this.tokenData.genesisData.ticker}`)
+    }
+  }
 
   render() {
     return (
       <div style={cardStyle}>
-        <p>{this.tokenData.genesisData.name}</p>
+        <p>{this.tokenData.genesisData.name} ({this.tokenData.genesisData.ticker})</p>
+        <table><tbody>
+          <tr>
+            <td>
+              <img src={this.state.mutableData.tokenIcon} alt="token icon"/>
+            </td>
+
+            <td>
+              placeholder
+            </td>
+          </tr>
+        </tbody></table>
       </div>
     )
   }

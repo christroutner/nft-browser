@@ -5,6 +5,8 @@ import React from 'react'
 // Local libraries
 import NFTCard from './nft-card'
 
+const tokenId = '288c1375c8e988c02672e7ccc88dedd5c8e07f44245fb0640593ce468f57a37f'
+
 class NFTs extends React.Component {
 
   constructor(props) {
@@ -13,13 +15,12 @@ class NFTs extends React.Component {
     this.wallet = props.wallet
 
     this.state = {
-      nftData: []
+      nftData: [],
     }
   }
 
   async componentDidMount() {
     await this.wallet.walletInfoPromise
-    const tokenId = '288c1375c8e988c02672e7ccc88dedd5c8e07f44245fb0640593ce468f57a37f'
     const tokenData = await this.wallet.getTokenData(tokenId)
     console.log(`Group tokenData: ${JSON.stringify(tokenData, null, 2)}`)
 
@@ -43,7 +44,15 @@ class NFTs extends React.Component {
   render() {
     return (
       <div>
-        <p>test</p>
+        <p>Loading NFTs associated with Group token{' '}
+          <a
+            href={`https://token.fullstack.cash/?tokenid=${tokenId}`}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {tokenId}
+          </a>
+        </p>
         {
           this.state.nftData.map((val, i) => {
             return (
