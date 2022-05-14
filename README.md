@@ -5,3 +5,6 @@ This is a prototype for displaying NFT information. These are NFTs created on th
 The NFTs displayed by this app capture video content. This app will automatically detect and display new NFTs. This code does not need to be updated in order to display new NFTs.
 
 This is a Gatsby JS single page application.
+
+Latest live version of this demo:
+https://bafybeibsx42hi7losyeaxedkilijti66oqmlfe23txj534wn3quloqznxe.ipfs.dweb.link/
