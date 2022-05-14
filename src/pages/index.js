@@ -14,6 +14,17 @@ const IndexPage = (props) => {
   return (
     <>
       <NFTs wallet={wallet}/>
+
+      <hr />
+      <p>
+        The code creating this page is open source. <a
+          href="https://github.com/christroutner/nft-browser"
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Check it out on GitHub
+        </a>
+      </p>
     </>
   )
 }
