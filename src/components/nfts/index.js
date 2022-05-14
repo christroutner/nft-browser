@@ -5,7 +5,7 @@ import React from 'react'
 // Local libraries
 import NFTCard from './nft-card'
 
-const tokenId = '288c1375c8e988c02672e7ccc88dedd5c8e07f44245fb0640593ce468f57a37f'
+const tokenId = 'c9c425f2c6352697c6665a53e035cbad8a44c4b1e36491a1838dc4655479aa09'
 
 class NFTs extends React.Component {
 
@@ -27,7 +27,8 @@ class NFTs extends React.Component {
     const nfts = tokenData.genesisData.nfts
     const nftData = []
 
-    for(let i=0; i < nfts.length; i++) {
+    for(let i=0; i < nfts.length ; i++) {
+    // for(let i=nfts.length-1; i > -1 ; i--) {
       const thisNft = nfts[i]
 
       const thisNftData = await this.wallet.getTokenData(thisNft)
