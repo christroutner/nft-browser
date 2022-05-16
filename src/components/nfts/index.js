@@ -5,7 +5,7 @@ import React from 'react'
 // Local libraries
 import NFTCard from './nft-card'
 
-const tokenId = 'c9c425f2c6352697c6665a53e035cbad8a44c4b1e36491a1838dc4655479aa09'
+const tokenId = '030563ddd65772d8e9b79b825529ed53c7d27037507b57c528788612b4911107'
 
 class NFTs extends React.Component {
 
