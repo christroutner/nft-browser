@@ -1,5 +1,6 @@
 import * as React from "react"
 import NFTs from '../components/nfts'
+import ServerSelect from '../components/servers'
 
 let wallet = {}
 if(typeof window !== 'undefined') {
@@ -35,6 +36,8 @@ const IndexPage = (props) => {
           </a>
         </li>
       </ul>
+      <hr />
+      <ServerSelect />
     </>
   )
 }

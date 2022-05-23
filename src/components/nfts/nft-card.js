@@ -7,7 +7,7 @@ import axios from 'axios'
 
 // Styles
 const cardStyle = {
-  "max-width": "100%",
+  maxWidth: "100%",
   border: '2px solid black',
   padding: '25px'
 }
