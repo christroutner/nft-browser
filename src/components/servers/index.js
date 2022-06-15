@@ -51,7 +51,10 @@ class ServerSelect extends React.Component {
   // }
 
   selectServer(value) {
-    console.log(`Server ${value[0].value} was selected.`)
+    console.log(`Server ${value[0].value} was selected. Reloading page...`)
+    if(typeof window !== 'undefined') {
+      window.location.href = `/?restURL=${value[0].value}`
+    }
   }
 
 
@@ -59,8 +62,8 @@ class ServerSelect extends React.Component {
     return (
       <div>
         <Select options={options} onChange={(values) => this.selectServer(values)} />
-        <p><center>Having trouble loading the NFTs? If NFTs don't load after a minute, then
-        try selecting a different back-end server.</center></p>
+        <p style={{textAlign: 'center'}}>Having trouble loading the NFTs? If NFTs don't load after a minute, then
+        try selecting a different back-end server.</p>
       </div>
     )
   }

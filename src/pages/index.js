@@ -1,10 +1,12 @@
 import * as React from "react"
 import NFTs from '../components/nfts'
 import ServerSelect from '../components/servers'
+import { useQueryParam, StringParam } from 'use-query-params'
 
 let wallet = {}
+let BchWallet
 if(typeof window !== 'undefined') {
-  const BchWallet = window.SlpWallet
+  BchWallet = window.SlpWallet
   const options = { interface: 'consumer-api' }
   wallet = new BchWallet(null, options)
 }
@@ -12,9 +14,22 @@ if(typeof window !== 'undefined') {
 
 // markup
 const IndexPage = (props) => {
+  // Detect different server passed as a query parameter.
+  // If a server is specified, reinstantiate the wallet and override the default
+  // server.
+  const [restURL] = useQueryParam('restURL', StringParam)
+  console.log('restURL: ', restURL)
+  if(restURL) {
+    const options = {
+      interface: 'consumer-api',
+      restURL
+    }
+    wallet = new BchWallet(null, options)
+  }
+
   return (
     <>
-      <NFTs wallet={wallet}/>
+      <NFTs wallet={wallet} />
 
       <hr />
       <ul>
